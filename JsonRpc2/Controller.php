@@ -359,7 +359,7 @@ class Controller extends \yii\web\Controller
     }
 
     /**
-     * Formats and returns
+     * Formats and returns (test)
      * @param null $result
      * @param \JsonRpc2\Exception|null $error
      * @param null $id
