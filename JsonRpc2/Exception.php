@@ -11,7 +11,7 @@ class Exception extends \yii\base\Exception
 
     private $data = null;
 
-    public function __construct($message, $code, $data = null, \Throwable $previous = null)
+    public function __construct($message, $code, $data = null, $previous = null)
     {
         $this->data = $data;
         parent::__construct($message, $code, $previous);
