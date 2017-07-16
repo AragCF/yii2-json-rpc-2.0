@@ -11,7 +11,7 @@ class Dto {
         $this->setDataFromArray((array)$data);
     }
 
-    protected function setDataFromArray($data)
+    public function setDataFromArray($data)
     {
         foreach (get_object_vars($this) as $name=>$defaultValue) {
             $property = new ReflectionProperty(get_class($this), $name);
