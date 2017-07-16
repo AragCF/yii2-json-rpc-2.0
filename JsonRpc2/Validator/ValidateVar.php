@@ -4,6 +4,7 @@ namespace JsonRpc2\Validator;
 
 use JsonRpc2;
 use JsonRpc2\Exception;
+use yii\helpers\ArrayHelper;
 
 class ValidateVar extends JsonRpc2\Validator
 {
@@ -82,8 +83,12 @@ class ValidateVar extends JsonRpc2\Validator
                     return (float)$value;
                 case "double":
                     return (double)$value;
-                case "mixed":
                 case "array":
+                    foreach ($value as &$v){
+                        if (is_subclass_of($v, '\\JsonRpc2\\Dto')) {
+                            $v->setDataFromArray(ArrayHelper::toArray($v));
+                        }
+                    }
                     return (array)$value;
                 case "bool":
                     return (bool)$value;
