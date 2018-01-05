@@ -90,6 +90,11 @@ class ValidateVar extends JsonRpc2\Validator
             }
         }
 
-        return $value;
+        throw new Exception(
+            \Yii::t('yii', 'In {className} type \'{type}\' is invalid',
+                ['className' => get_class($parent), 'type' => $type]
+            ),
+            Exception::INTERNAL_ERROR
+        );
     }
 }
