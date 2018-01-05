@@ -66,9 +66,13 @@ class Validator
      */
     public static function run($name, $params, $value)
     {
-        $class = "JsonRpc2\\Validator\\Validate" . ucfirst($name);
-        if (!class_exists($class)) {
-            return $value;
+        if (!class_exists($name)) {
+            $class = "JsonRpc2\\Validator\\Validate" . ucfirst($name);
+            if (!class_exists($class)) {
+                return $value;
+            }
+        } elseif(is_subclass_of($name, '\\JsonRpc2\\Validator')) {
+            $class = $name;
         }
         /** @var \JsonRpc2\Validator $validator */
         $validator = new $class($value, $params);
