@@ -13,7 +13,10 @@ class ValidateVar extends JsonRpc2\Validator
      */
     protected function validate()
     {
-        $this->value->data = $this->bringValueToType($this->value->parent, trim($this->params), $this->value->data);
+        $value = $this->bringValueToType($this->value->parent, trim($this->params), $this->value->data);
+        if(isset($value)){        
+            $this->value->data = $value;
+        }
     }
 
     /**
@@ -89,12 +92,5 @@ class ValidateVar extends JsonRpc2\Validator
                     return (bool)$value;
             }
         }
-
-        throw new Exception(
-            \Yii::t('yii', 'In {className} type \'{type}\' is invalid',
-                ['className' => get_class($parent), 'type' => $type]
-            ),
-            Exception::INTERNAL_ERROR
-        );
     }
 }
